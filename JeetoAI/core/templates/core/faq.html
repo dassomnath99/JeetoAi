@@ -1,0 +1,222 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}FAQ & Help{% endblock title %}
+
+{% block content %}
+    <!-- Main Content -->
+    <main class="pt-16">
+        <div class="min-h-screen py-12 px-4">
+            <div class="max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
+                        <span class="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">FAQ & Help</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg">Find answers to common questions and get help</p>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="mb-8">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="faq-search"
+                            placeholder="Search for help..." 
+                            class="w-full pl-12 pr-4 py-4 bg-black/40 border border-purple-500/20 text-white placeholder-gray-400 rounded-lg focus:border-purple-500 focus:outline-none"
+                        >
+                        <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl">🔍</span>
+                    </div>
+                </div>
+
+                <!-- FAQ Categories -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="bg-black/40 border border-purple-500/20 rounded-lg p-6 text-center hover:border-purple-500/40 transition-colors cursor-pointer" onclick="scrollToSection('general')">
+                        <div class="text-4xl mb-3">❓</div>
+                        <h3 class="text-white font-bold text-lg mb-2">General</h3>
+                        <p class="text-gray-400 text-sm">Basic questions about JeetoAI</p>
+                    </div>
+                    <div class="bg-black/40 border border-purple-500/20 rounded-lg p-6 text-center hover:border-purple-500/40 transition-colors cursor-pointer" onclick="scrollToSection('gameplay')">
+                        <div class="text-4xl mb-3">🎮</div>
+                        <h3 class="text-white font-bold text-lg mb-2">Gameplay</h3>
+                        <p class="text-gray-400 text-sm">How to play and game mechanics</p>
+                    </div>
+                    <div class="bg-black/40 border border-purple-500/20 rounded-lg p-6 text-center hover:border-purple-500/40 transition-colors cursor-pointer" onclick="scrollToSection('account')">
+                        <div class="text-4xl mb-3">👤</div>
+                        <h3 class="text-white font-bold text-lg mb-2">Account</h3>
+                        <p class="text-gray-400 text-sm">Account and profile management</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Sections -->
+                <div class="space-y-8">
+                    <!-- General Questions -->
+                    <section id="general">
+                        <h2 class="text-2xl font-bold text-white mb-6">❓ General Questions</h2>
+                        <div class="space-y-4" id="general-faqs">
+                            <!-- FAQs will be populated by JavaScript -->
+                        </div>
+                    </section>
+
+                    <!-- Gameplay Questions -->
+                    <section id="gameplay">
+                        <h2 class="text-2xl font-bold text-white mb-6">🎮 Gameplay</h2>
+                        <div class="space-y-4" id="gameplay-faqs">
+                            <!-- FAQs will be populated by JavaScript -->
+                        </div>
+                    </section>
+
+                    <!-- Account Questions -->
+                    <section id="account">
+                        <h2 class="text-2xl font-bold text-white mb-6">👤 Account & Profile</h2>
+                        <div class="space-y-4" id="account-faqs">
+                            <!-- FAQs will be populated by JavaScript -->
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Contact Support -->
+                <div class="bg-gradient-to-r from-purple-900/40 to-cyan-900/40 border border-purple-500/20 rounded-2xl p-8 mt-12 text-center">
+                    <h2 class="text-2xl font-bold text-white mb-4">Still Need Help?</h2>
+                    <p class="text-gray-300 mb-6">Can't find what you're looking for? Our support team is here to help!</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="https://wa.me/+918926666735" class="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white px-6 py-3 rounded-lg">
+                            💬 Contact Support
+                        </a>
+                        <a href="mailto:somnathdas4848@gmail.com" class="border border-purple-500 text-purple-400 hover:bg-purple-500/10 px-6 py-3 rounded-lg">
+                            📧 Email Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // FAQ data
+        const faqData = {
+            general: [
+                {
+                    question: "What is JeetoAI?",
+                    answer: "JeetoAI is the ultimate gaming platform where players compete, connect, and conquer. Join millions of gamers worldwide in epic battles and tournaments."
+                },
+                {
+                    question: "Is JeetoAI free to use?",
+                    answer: "Yes! JeetoAI is free to join and play. We offer optional premium features for enhanced gaming experience."
+                },
+                {
+                    question: "What devices are supported?",
+                    answer: "JeetoAI works on desktop computers, laptops, tablets, and mobile devices with modern web browsers."
+                },
+                {
+                    question: "How do I get started?",
+                    answer: "Simply create a free account, choose your first game, and start playing! You can also browse our game library without an account."
+                }
+            ],
+            gameplay: [
+                {
+                    question: "How do tournaments work?",
+                    answer: "Tournaments are competitive events where players compete for rankings and prizes. Check the tournaments section for upcoming events and registration details."
+                },
+                {
+                    question: "How is ranking calculated?",
+                    answer: "Rankings are based on your performance across games, including wins, scores, and tournament results. The more you play and win, the higher you climb!"
+                },
+                {
+                    question: "Can I play with friends?",
+                    answer: "Absolutely! You can invite friends, create private matches, and team up in multiplayer games."
+                },
+                {
+                    question: "What happens if I disconnect during a game?",
+                    answer: "If you disconnect, you'll have a short window to reconnect. Repeated disconnections may affect your ranking and may result in temporary penalties."
+                }
+            ],
+            account: [
+                {
+                    question: "How do I change my username?",
+                    answer: "Go to your profile settings and click 'Edit Profile'. You can change your username once every 30 days."
+                },
+                {
+                    question: "How do I reset my password?",
+                    answer: "Click 'Forgot Password' on the login page and follow the instructions sent to your email address."
+                },
+                {
+                    question: "Can I delete my account?",
+                    answer: "Yes, you can delete your account from the account settings. Note that this action is permanent and cannot be undone."
+                },
+                {
+                    question: "How do I contact support?",
+                    answer: "You can contact our support team through the contact form below, email us directly, or use the live chat feature when available."
+                }
+            ]
+        };
+
+        // Render FAQs
+        function renderFAQs() {
+            Object.keys(faqData).forEach(category => {
+                const container = document.getElementById(category + '-faqs');
+                container.innerHTML = faqData[category].map((faq, index) => `
+                    <div class="bg-black/40 border border-purple-500/20 rounded-lg overflow-hidden">
+                        <button 
+                            class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-purple-500/10 transition-colors"
+                            onclick="toggleFAQ('${category}-${index}')"
+                        >
+                            <span class="text-white font-medium">${faq.question}</span>
+                            <span class="text-purple-400 text-xl" id="${category}-${index}-icon">+</span>
+                        </button>
+                        <div id="${category}-${index}" class="hidden px-6 pb-4">
+                            <p class="text-gray-300">${faq.answer}</p>
+                        </div>
+                    </div>
+                `).join('');
+            });
+        }
+
+        // Toggle FAQ
+        function toggleFAQ(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(id + '-icon');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.textContent = '−';
+            } else {
+                content.classList.add('hidden');
+                icon.textContent = '+';
+            }
+        }
+
+        // Scroll to section
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Search functionality
+        document.getElementById('faq-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            Object.keys(faqData).forEach(category => {
+                const container = document.getElementById(category + '-faqs');
+                const faqs = container.querySelectorAll('.bg-black\\/40');
+                
+                faqs.forEach((faq, index) => {
+                    const question = faqData[category][index].question.toLowerCase();
+                    const answer = faqData[category][index].answer.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        faq.style.display = 'block';
+                    } else {
+                        faq.style.display = searchTerm ? 'none' : 'block';
+                    }
+                });
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFAQs();
+        });
+    </script>
+{% endblock %}

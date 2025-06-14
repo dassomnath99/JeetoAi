@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+  Prompt Generator
+{% endblock %}
+
+{% block content %}
+  <main class="pt-16">
+    <div class="min-h-screen py-8 px-4 text-white">
+      <h1 class="text-3xl font-bold mb-4">Prompt Generator</h1>
+      <form id="prompt-form" enctype="multipart/form-data" method="post" action="{% url 'image_api' %}">
+        {% csrf_token %}
+        <label for="user-prompt" class="block mb-2">Enter your prompt:</label>
+        <textarea id="user-prompt" name="user_prompt" rows="4" class="w-full p-2 rounded text-black mb-4" placeholder="Type your prompt here..."></textarea>
+        <label for="image" class="block mb-2">Upload an image:</label>
+        <input type="file" id="image" name="image" accept="image/*" class="mt-2 block mb-4" />
+        <button type="submit" class="mt-2 bg-blue-500 text-white py-2 px-4 rounded">Generate</button>
+      </form>
+      <div id="generated-prompt" class="mt-4 p-2 border border-gray-300 rounded"></div>
+    </div>
+  </main>
+{% endblock content%}
+
+{% block script %}
+  <script>
+    document.getElementById('prompt-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const userPrompt = document.getElementById('user-prompt').value;
+      // Simulate prompt generation
+      const generatedPrompt = `Generated Prompt: ${userPrompt}`;
+      document.getElementById('generated-prompt').innerText = generatedPrompt;
+    });
+  </script>
+{% endblock script %}

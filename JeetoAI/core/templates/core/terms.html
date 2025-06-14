@@ -1,0 +1,131 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Terms & Conditions{% endblock title %}
+{% block content %}
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <div class="min-h-screen py-12 px-4">
+            <div class="max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
+                        <span class="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Terms & Conditions</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg">Last updated: January 1, 2024</p>
+                </div>
+
+                <!-- Content -->
+                <div class="bg-black/40 border border-purple-500/20 rounded-2xl p-8 space-y-8">
+                    <section>
+                        <h2 class="text-2xl font-bold text-white mb-4">1. Acceptance of Terms</h2>
+                        <p class="text-gray-300 leading-relaxed">
+                            By accessing and using JeetoAI, you accept and agree to be bound by the terms and provision of this agreement. 
+                            If you do not agree to abide by the above, please do not use this service.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-2xl font-bold text-white mb-4">2. Use License</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Permission is granted to temporarily access JeetoAI for personal, non-commercial transitory viewing only. 
+                            This is the grant of a license, not a transfer of title, and under this license you may not:
+                        </p>
+                        <ul class="text-gray-300 space-y-2 ml-6">
+                            <li>• modify or copy the materials</li>
+                            <li>• use the materials for any commercial purpose or for any public display</li>
+                            <li>• attempt to reverse engineer any software contained on JeetoAI</li>
+                            <li>• remove any copyright or other proprietary notations from the materials</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-2xl font-bold text-white mb-4">3. User Accounts</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            When you create an account with us, you must provide information that is accurate, complete, and current at all times. 
+                            You are responsible for safeguarding the password and for all activities that occur under your account.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            You agree not to disclose your password to any third party. You must notify us immediately upon becoming aware 
+                            of any breach of security or unauthorized use of your account.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-2xl font-bold text-white mb-4">4. Gameplay and Conduct</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Users agree to engage in fair play and maintain respectful conduct. The following behaviors are prohibited:
+                        </p>
+                        <ul class="text-gray-300 space-y-2 ml-6">
+                            <li>• Cheating, exploiting, or using unauthorized third-party software</li>
+                            <li>• Harassment, bullying, or abusive behavior toward other users</li>
+                            <li>• Sharing inappropriate content or engaging in harmful activities</li>
+                            <li>• Creating multiple accounts to gain unfair advantages</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-2xl font-bold text-white mb-4">5. Privacy and Data</h2>
+                        <p class="text-gray-300 leading-relaxed">
+                            Your privacy is important to us. Our Privacy Policy explains how we collect, use, and protect your information 
+                            when you use our service. By using our service, you agree to the collection and use of information in 
+                            accordance with our Privacy Policy.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-2xl font-bold text-white mb-4">6. Disclaimer</h2>
+                        <p class="text-gray-300 leading-relaxed">
+                            The materials on JeetoAI are provided on an 'as is' basis. JeetoAI makes no warranties, expressed or implied, 
+                            and hereby disclaims and negates all other warranties including without limitation, implied warranties or 
+                            conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property 
+                            or other violation of rights.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-2xl font-bold text-white mb-4">7. Limitations</h2>
+                        <p class="text-gray-300 leading-relaxed">
+                            In no event shall JeetoAI or its suppliers be liable for any damages (including, without limitation, damages 
+                            for loss of data or profit, or due to business interruption) arising out of the use or inability to use the 
+                            materials on JeetoAI, even if JeetoAI or its representatives have been notified orally or in writing of the 
+                            possibility of such damage.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-2xl font-bold text-white mb-4">8. Revisions and Errata</h2>
+                        <p class="text-gray-300 leading-relaxed">
+                            The materials appearing on JeetoAI could include technical, typographical, or photographic errors. JeetoAI does 
+                            not warrant that any of the materials are accurate, complete, or current. JeetoAI may make changes to the 
+                            materials at any time without notice.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-2xl font-bold text-white mb-4">9. Governing Law</h2>
+                        <p class="text-gray-300 leading-relaxed">
+                            These terms and conditions are governed by and construed in accordance with the laws and you irrevocably 
+                            submit to the exclusive jurisdiction of the courts in that state or location.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-2xl font-bold text-white mb-4">10. Contact Information</h2>
+                        <p class="text-gray-300 leading-relaxed">
+                            If you have any questions about these Terms & Conditions, please contact us through our support channels 
+                            or email us directly. We're here to help clarify any concerns you may have.
+                        </p>
+                    </section>
+                </div>
+
+                <!-- Back to Home -->
+                <div class="text-center mt-8">
+                    <a href="{% url 'core:index' %}" class="inline-flex items-center text-purple-400 hover:text-purple-300">
+                        ← Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

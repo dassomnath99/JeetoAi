@@ -1,0 +1,21 @@
+# Environment variables
+.env
+JeetoAI/.env
+
+# Virtual environments
+.venv/
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+
+# Django database
+JeetoAI/db.sqlite3
+
+# VS Code and IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

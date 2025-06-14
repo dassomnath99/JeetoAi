@@ -1,0 +1,165 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Games{% endblock title %}
+{% block content %}
+    <!-- Main Content -->
+    <main class="pt-16">
+        <div class="min-h-screen py-8 px-4">
+            <div class="max-w-7xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
+                        Game <span class="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Library</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg">Discover and play amazing games from our collection</p>
+                </div>
+
+                <!-- Search and Filter -->
+                <div class="mb-8 flex flex-col md:flex-row gap-4">
+                    <div class="relative flex-1">
+                        <input 
+                            type="text" 
+                            id="search-input"
+                            placeholder="Search games..." 
+                            class="w-full pl-10 pr-4 py-3 bg-black/40 border border-purple-500/20 text-white placeholder-gray-400 rounded-lg focus:border-purple-500 focus:outline-none"
+                        >
+                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">🔍</span>
+                    </div>
+                    <div class="flex gap-2 flex-wrap" id="category-filters">
+                        <!-- Category buttons will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Games Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="games-grid">
+                    <!-- Games will be populated by JavaScript -->
+                </div>
+
+                <div id="no-results" class="hidden text-center py-12">
+                    <div class="text-gray-400 text-lg">No games found matching your criteria</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Games data
+        const games = [
+            {% for game in game_data %}
+            {
+                id: {{ game.id }},
+                title: "{{ game.game_name|escapejs }}",
+                category: "{{ game.game_category|escapejs }}",
+                players: "{{ game.game_players|escapejs }}",
+                rating: "{{ game.game_rating|escapejs }}",
+                playTime: "{{ game.game_duration|escapejs }}",
+                image: "{{ game.game_image.url|escapejs }}",
+                description: "{{ game.game_description|escapejs }}"
+            }{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ];
+
+        const categories = ["All", "FPS", "RPG", "Strategy", "Racing", "Adventure", "Sports"];
+        let selectedCategory = "All";
+        let searchTerm = "";
+
+        // Render category filters
+        function renderCategoryFilters() {
+            const container = document.getElementById('category-filters');
+            container.innerHTML = categories.map(category => `
+                <button 
+                    class="px-4 py-2 rounded-lg ${selectedCategory === category ? 
+                        'bg-gradient-to-r from-purple-600 to-cyan-600 text-white' : 
+                        'border border-purple-500/20 text-gray-400 hover:text-white hover:bg-purple-500/10'}"
+                    onclick="filterByCategory('${category}')"
+                >
+                    ${category}
+                </button>
+            `).join('');
+        }
+
+        // Filter games
+        function filterGames() {
+            const filteredGames = games.filter(game => {
+                const matchesSearch = game.title.toLowerCase().includes(searchTerm.toLowerCase());
+                const matchesCategory = selectedCategory === "All" || game.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+            
+            renderGames(filteredGames);
+        }
+
+        // Render games
+        function renderGames(gamesToRender) {
+            const container = document.getElementById('games-grid');
+            const noResults = document.getElementById('no-results');
+            
+            if (gamesToRender.length === 0) {
+                container.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+            
+            noResults.classList.add('hidden');
+            container.innerHTML = gamesToRender.map(game => `
+                <div class="bg-black/40 border border-purple-500/20 rounded-lg overflow-hidden group hover:border-purple-500/40 transition-all duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img 
+                            src="${game.image}" 
+                            alt="${game.title}"
+                            class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-purple-600 text-white px-2 py-1 rounded text-sm">${game.category}</span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                        </div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-xl font-bold text-white mb-1">${game.title}</h3>
+                            <p class="text-gray-300 text-sm">${game.description}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between text-gray-400 text-sm mb-4">
+                            <div class="flex items-center">
+                                <span>👥 ${game.players}</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span>⭐ ${game.rating}</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span>🕒 ${game.playTime}</span>
+                            </div>
+                        </div>
+
+                        <button onclick="window.location.href='/games/${game.id}/'" class="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white py-2 rounded-lg group">
+                            🎮 Play Now
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter by category
+        function filterByCategory(category) {
+            selectedCategory = category;
+            renderCategoryFilters();
+            filterGames();
+        }
+
+        // Search functionality
+        document.getElementById('search-input').addEventListener('input', function(e) {
+            searchTerm = e.target.value;
+            filterGames();
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCategoryFilters();
+            renderGames(games);
+        });
+    </script>
+{% endblock %}

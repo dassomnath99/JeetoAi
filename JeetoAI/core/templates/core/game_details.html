@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+  Generate Game Prompt
+{% endblock %}
+
+{% block content %}
+  <main class="pt-16">
+    <div class="min-h-screen flex items-center justify-center py-12 px-4">
+      <div class="max-w-md w-full">
+        <form method="POST" enctype="multipart/form-data" id="gameForm">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label for="prompt" class="block text-sm font-medium text-gray-700">Prompt</label>
+            <textarea id="prompt" name="prompt" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required></textarea>
+          </div>
+          <div class="mb-4">
+            <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
+            <input id="image" name="image" type="file" accept="image/*" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+          </div>
+          <div class="mb-4">
+            <label for="user_guess" class="block text-sm font-medium text-gray-700">Your Guess</label>
+            <textarea id="user_guess" name="user_guess" rows="2" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+          </div>
+          <div class="mb-4 flex items-start">
+            <input id="agree" name="agree" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded" required>
+            <label for="agree" class="ml-2 block text-sm text-gray-700">
+              I agree to the
+              <a href="{% url 'terms' %}" class="text-indigo-600 hover:underline" target="_blank">Terms and Conditions</a>
+              and
+              <a href="{% url 'privacy' %}" class="text-indigo-600 hover:underline" target="_blank">Privacy Policy</a>.
+            </label>
+          </div>
+          <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700" id="startGameBtn" disabled>Generate Game</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script>
+    // Enable the button only if the checkbox is checked
+    document.addEventListener('DOMContentLoaded', function() {
+      const agreeCheckbox = document.getElementById('agree');
+      const startGameBtn = document.getElementById('startGameBtn');
+      agreeCheckbox.addEventListener('change', function() {
+        startGameBtn.disabled = !this.checked;
+      });
+    });
+  </script>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    // Additional JavaScript can be added here if needed
+  </script>
+{% endblock %}
